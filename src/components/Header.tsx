@@ -13,10 +13,13 @@ export const navItems: { id: string; label: string }[] = [
 ];
 
 const navIds = navItems.map((item) => item.id);
+// The hero is observed too so the highlight clears when scrolling back to the top.
+const observedIds = ['hero', ...navIds];
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const active = useActiveSection(navIds);
+  const observed = useActiveSection(observedIds);
+  const active = observed === 'hero' ? null : observed;
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
