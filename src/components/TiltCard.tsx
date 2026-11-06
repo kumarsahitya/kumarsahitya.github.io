@@ -14,6 +14,7 @@ export function TiltCard({ children, className }: TiltCardProps) {
   return (
     <motion.div
       className={className}
+      style={{ transformPerspective: 800 }}
       whileHover={{ y: -4, rotateX: 4, rotateY: -4 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
     >
