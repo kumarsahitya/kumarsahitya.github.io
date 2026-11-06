@@ -25,6 +25,8 @@
   --c-bg: #0c0513; --c-surface: #160b26; --c-border: #2a1a44;
   --c-text: #f3effc; --c-muted: #b8aed2; --c-accent: #c770f0; --c-accent-soft: #2b1540;
 }
+[data-theme="light"] { color-scheme: light; }
+[data-theme="dark"] { color-scheme: dark; }
 html { scroll-behavior: smooth; }
 body { background: var(--c-bg); color: var(--c-text); transition: background-color 200ms, color 200ms; }
 section[id] { scroll-margin-top: 5rem; }
