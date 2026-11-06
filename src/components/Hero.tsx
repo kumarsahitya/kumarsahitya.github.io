@@ -16,9 +16,11 @@ export function Hero() {
   return (
     <section id="hero" className="relative isolate min-h-[90svh] flex items-center overflow-hidden">
       {motionAllowed && (
-        <Suspense fallback={null}>
-          <Particles />
-        </Suspense>
+        <div aria-hidden="true">
+          <Suspense fallback={null}>
+            <Particles />
+          </Suspense>
+        </div>
       )}
       <div className="max-w-5xl mx-auto px-4 w-full grid items-center gap-12 md:grid-cols-2">
         <Reveal>
