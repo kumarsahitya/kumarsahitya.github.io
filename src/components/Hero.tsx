@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, type ComponentType } from 'react';
 import { profile } from '../data/profile';
 import { useMotionAllowed } from '../hooks/useMotionAllowed';
 import { useTyping } from '../hooks/useTyping';
@@ -6,7 +6,7 @@ import { HeroIllustration } from './HeroIllustration';
 import { Reveal } from './Reveal';
 import { SocialLinks } from './SocialLinks';
 
-const Particles = lazy(() => import('./Particles').catch(() => ({ default: () => null })));
+const Particles = lazy<ComponentType>(() => import('./Particles').catch(() => ({ default: () => null })));
 
 export function Hero() {
   const motionAllowed = useMotionAllowed();
