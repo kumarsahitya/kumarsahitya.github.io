@@ -29,6 +29,10 @@ Deployment runs through `.github/workflows/deploy.yml`. Follow these steps in or
 2. Merge the `revamp` pull request.
 3. From then on, every push to `main` runs the workflow, which tests, builds and publishes the site.
 
+## Notes
+
+Without JavaScript the page shows a minimal noscript fallback; the full site is client-rendered.
+
 ## Credits
 
 The hero illustration is based on the "Typing Code" illustration from [unDraw](https://undraw.co), used under the unDraw licence. Attribution is not required, but it is credited here as a courtesy.
