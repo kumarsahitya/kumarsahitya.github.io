@@ -31,4 +31,7 @@ html { scroll-behavior: smooth; }
 body { background: var(--c-bg); color: var(--c-text); transition: background-color 200ms, color 200ms; }
 section[id] { scroll-margin-top: 5rem; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@media (prefers-reduced-motion: no-preference) {
+  *, *::before, *::after { transition-property: background-color, border-color, color; transition-duration: 200ms; }
+}
 @media print { *, *::before, *::after { opacity: 1 !important; transform: none !important; } }
