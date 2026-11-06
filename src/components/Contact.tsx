@@ -11,7 +11,7 @@ export function Contact() {
         <p className="text-lg text-muted max-w-xl">{profile.contactLine}</p>
         <a
           href={`mailto:${profile.email}`}
-          className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-white transition-colors hover:opacity-90 mt-6"
+          className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-bg transition-colors hover:opacity-90 mt-6"
         >
           <LuMail aria-hidden="true" />
           Email me
