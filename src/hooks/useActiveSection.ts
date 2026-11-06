@@ -20,7 +20,18 @@ export function useActiveSection(ids: string[]): string | null {
       { rootMargin: '-40% 0px -55% 0px' },
     );
     elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+
+    // On tall viewports the last section can never reach the observer band, so pin it at the page bottom.
+    const lastId = elements[elements.length - 1].id;
+    const onScroll = () => {
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) setActive(lastId);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', onScroll);
+    };
   }, [key]);
 
   return active;
