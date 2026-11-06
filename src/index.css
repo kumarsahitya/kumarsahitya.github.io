@@ -1,1 +1,31 @@
 @import "tailwindcss";
+@import "@fontsource/poppins/400.css";
+@import "@fontsource/poppins/500.css";
+@import "@fontsource/poppins/600.css";
+@import "@fontsource/poppins/700.css";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme inline {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-border: var(--c-border);
+  --color-text: var(--c-text);
+  --color-muted: var(--c-muted);
+  --color-accent: var(--c-accent);
+  --color-accent-soft: var(--c-accent-soft);
+}
+
+:root, [data-theme="light"] {
+  --c-bg: #faf8ff; --c-surface: #ffffff; --c-border: #e6e0f5;
+  --c-text: #17122b; --c-muted: #5b5674; --c-accent: #6d28d9; --c-accent-soft: #ede9fe;
+}
+[data-theme="dark"] {
+  --c-bg: #0c0513; --c-surface: #160b26; --c-border: #2a1a44;
+  --c-text: #f3effc; --c-muted: #b8aed2; --c-accent: #c770f0; --c-accent-soft: #2b1540;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--c-bg); color: var(--c-text); transition: background-color 200ms, color 200ms; }
+section[id] { scroll-margin-top: 5rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

@@ -1,7 +1,18 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      (function () {
+        var d = document.documentElement, t;
+        try { t = localStorage.getItem('theme'); } catch (e) {}
+        if (t !== 'light' && t !== 'dark') {
+          try { t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; } catch (e) { t = 'dark'; }
+        }
+        d.dataset.theme = t;
+      })();
+    </script>
     <meta charset="UTF-8" />
+    <meta name="color-scheme" content="dark light" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kumar Sahitya</title>
