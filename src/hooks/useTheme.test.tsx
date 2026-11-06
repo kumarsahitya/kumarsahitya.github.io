@@ -17,6 +17,7 @@ test('falls back to OS preference when no attribute and no storage', () => {
   const { result } = renderHook(() => useTheme());
   expect(result.current.theme).toBe('dark');
   expect(document.documentElement.dataset.theme).toBe('dark');
+  expect(localStorage.getItem('theme')).toBeNull();
 });
 
 test('toggle flips the attribute and persists', () => {

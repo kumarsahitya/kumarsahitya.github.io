@@ -26,11 +26,6 @@ export function useTheme(): { theme: Theme; toggle: () => void } {
   useEffect(() => {
     const root = document.documentElement;
     if (root.dataset.theme !== theme) root.dataset.theme = theme;
-    try {
-      localStorage.setItem(STORAGE_KEY, theme);
-    } catch {
-      // storage unavailable, theme still applies for this session
-    }
   }, [theme]);
 
   // Keep every useTheme() instance in sync with the attribute.
@@ -45,8 +40,14 @@ export function useTheme(): { theme: Theme; toggle: () => void } {
   }, []);
 
   const toggle = useCallback(() => {
-    setTheme((current) => (current === 'dark' ? 'light' : 'dark'));
-  }, []);
+    const next: Theme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    try {
+      localStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      // storage unavailable, theme still applies for this session
+    }
+  }, [theme]);
 
   return { theme, toggle };
 }
