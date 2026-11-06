@@ -39,6 +39,23 @@ export function useTheme(): { theme: Theme; toggle: () => void } {
     return () => observer.disconnect();
   }, []);
 
+  // Follow OS theme changes until the user has made an explicit choice.
+  useEffect(() => {
+    if (typeof window.matchMedia !== 'function') return;
+    const mql = window.matchMedia('(prefers-color-scheme: dark)');
+    if (!mql || typeof mql.addEventListener !== 'function') return;
+    const onChange = (event: { matches: boolean }) => {
+      try {
+        if (localStorage.getItem(STORAGE_KEY) !== null) return;
+      } catch {
+        // storage unavailable, treat as no stored choice
+      }
+      setTheme(event.matches ? 'dark' : 'light');
+    };
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, []);
+
   const toggle = useCallback(() => {
     const next: Theme = theme === 'dark' ? 'light' : 'dark';
     setTheme(next);

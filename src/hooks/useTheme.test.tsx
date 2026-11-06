@@ -7,6 +7,19 @@ beforeEach(() => {
   vi.stubGlobal('matchMedia', vi.fn().mockReturnValue({ matches: true, addEventListener: vi.fn(), removeEventListener: vi.fn() }));
 });
 
+afterEach(() => {
+  vi.unstubAllGlobals();
+  vi.restoreAllMocks();
+});
+
+function stubSystemTheme(matches: boolean) {
+  const addEventListener = vi.fn();
+  const removeEventListener = vi.fn();
+  vi.stubGlobal('matchMedia', vi.fn().mockReturnValue({ matches, addEventListener, removeEventListener }));
+  const handler = () => addEventListener.mock.calls.find(([type]) => type === 'change')?.[1] as (e: { matches: boolean }) => void;
+  return { addEventListener, removeEventListener, handler };
+}
+
 test('initial theme comes from data-theme set by the pre-paint script', () => {
   document.documentElement.dataset.theme = 'light';
   const { result } = renderHook(() => useTheme());
@@ -34,4 +47,33 @@ test('still toggles when localStorage throws', () => {
   const { result } = renderHook(() => useTheme());
   act(() => result.current.toggle());
   expect(document.documentElement.dataset.theme).toBe('light');
+});
+
+test('follows a system theme change when no choice is stored', () => {
+  const system = stubSystemTheme(false);
+  const { result } = renderHook(() => useTheme());
+  expect(result.current.theme).toBe('light');
+  act(() => system.handler()({ matches: true }));
+  expect(result.current.theme).toBe('dark');
+  expect(document.documentElement.dataset.theme).toBe('dark');
+  expect(localStorage.getItem('theme')).toBeNull();
+});
+
+test('ignores a system theme change once a choice is stored', () => {
+  localStorage.setItem('theme', 'light');
+  document.documentElement.dataset.theme = 'light';
+  const system = stubSystemTheme(false);
+  const { result } = renderHook(() => useTheme());
+  act(() => system.handler()({ matches: true }));
+  expect(result.current.theme).toBe('light');
+  expect(document.documentElement.dataset.theme).toBe('light');
+});
+
+test('removes the system listener on unmount', () => {
+  const system = stubSystemTheme(false);
+  const { unmount } = renderHook(() => useTheme());
+  const handler = system.handler();
+  expect(handler).toBeTypeOf('function');
+  unmount();
+  expect(system.removeEventListener).toHaveBeenCalledWith('change', handler);
 });
