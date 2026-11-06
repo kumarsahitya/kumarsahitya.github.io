@@ -1,8 +1,8 @@
 import { profile } from './profile';
-import { skills } from './skills';
+import { skills, skillsIntro } from './skills';
 import { experience } from './experience';
 import { education } from './education';
-import { services } from './services';
+import { services, servicesIntro } from './services';
 
 test('profile has exactly the three approved socials and three roles', () => {
   expect(profile.roles).toEqual(['Senior Software Engineer', 'Full-Stack Developer', 'Freelancer']);
@@ -33,4 +33,11 @@ test('education has four entries and services six, skills eighteen', () => {
   expect(services).toHaveLength(6);
   expect(skills).toHaveLength(18);
   expect(skills[0].name).toBe('React');
+});
+
+test('skills and services intros are non-empty strings', () => {
+  for (const intro of [skillsIntro, servicesIntro]) {
+    expect(typeof intro).toBe('string');
+    expect(intro.length).toBeGreaterThan(0);
+  }
 });

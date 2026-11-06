@@ -35,3 +35,6 @@ export const services: Service[] = [
     icon: LuArrowRightLeft,
   },
 ];
+
+export const servicesIntro =
+  'I help teams build and modernise web products, from user interface components to backend services.';

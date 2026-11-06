@@ -40,3 +40,6 @@ export const skills: Skill[] = [
   { name: 'CakePHP', icon: SiCakephp },
   { name: 'CodeIgniter', icon: SiCodeigniter },
 ];
+
+export const skillsIntro =
+  'I work across the full stack, from React and Angular component libraries to PHP and Symfony services. These are the technologies I use most today, along with the ones I worked with earlier in my career.';
