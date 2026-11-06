@@ -14,20 +14,24 @@ function readAccent(): string {
   return getComputedStyle(document.documentElement).getPropertyValue('--c-accent').trim();
 }
 
-function useAccentColor(): string {
-  const [color, setColor] = useState(readAccent);
+function readTheme(): string {
+  return document.documentElement.dataset.theme ?? 'dark';
+}
+
+function useThemeStyle(): { color: string; theme: string } {
+  const [style, setStyle] = useState(() => ({ color: readAccent(), theme: readTheme() }));
 
   useEffect(() => {
-    const observer = new MutationObserver(() => setColor(readAccent()));
+    const observer = new MutationObserver(() => setStyle({ color: readAccent(), theme: readTheme() }));
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     return () => observer.disconnect();
   }, []);
 
-  return color;
+  return style;
 }
 
 export function Particles() {
-  const color = useAccentColor();
+  const { color, theme } = useThemeStyle();
 
   const options = useMemo<ISourceOptions>(
     () => ({
@@ -36,14 +40,14 @@ export function Particles() {
       particles: {
         number: { value: 60 },
         paint: { fill: { enable: true, color: { value: color } } },
-        opacity: { value: { min: 0.1, max: 0.5 } },
+        opacity: { value: theme === 'light' ? { min: 0.08, max: 0.3 } : { min: 0.1, max: 0.5 } },
         size: { value: { min: 1, max: 2.5 } },
         move: { enable: true, speed: 0.3, direction: 'none', outModes: 'out' },
         links: { enable: false },
       },
       interactivity: { events: { onHover: { enable: false }, onClick: { enable: false } } },
     }),
-    [color],
+    [color, theme],
   );
 
   return (
