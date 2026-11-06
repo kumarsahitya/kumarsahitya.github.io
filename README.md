@@ -1,32 +1,34 @@
-# React + TypeScript + Vite
+# Kumar Sahitya - Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A single-page portfolio site built with React, TypeScript, Vite and Tailwind CSS. It covers profile, skills, experience, education and services, and supports a light and dark theme. Sections animate into view as you scroll, and the site is published to GitHub Pages from the root of `kumarsahitya.github.io`.
 
-Currently, two official plugins are available:
+## Local development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev     # start the Vite dev server
+npm test        # run the Vitest suite once
+npm run build   # type-check and build into dist/
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Editing content
+
+Almost all of the text on the site lives in `src/data/`:
+
+- `profile.ts`: name, roles, about text, quick facts, email and social links.
+- `skills.ts`: the skill list with icons, and the intro text above it.
+- `experience.ts`: work history, with title, company, location, dates and bullet points.
+- `education.ts`: degrees, institutions, dates and optional notes.
+- `services.ts`: the services offered, and the intro text above them.
+
+## Deployment
+
+Deployment runs through `.github/workflows/deploy.yml`. Follow these steps in order:
+
+1. In the repository, open Settings, then Pages, and set Source to "GitHub Actions".
+2. Merge the `revamp` pull request.
+3. From then on, every push to `main` runs the workflow, which tests, builds and publishes the site.
+
+## Credits
+
+The hero illustration is based on the "Typing Code" illustration from [unDraw](https://undraw.co), used under the unDraw licence. Attribution is not required, but it is credited here as a courtesy.
