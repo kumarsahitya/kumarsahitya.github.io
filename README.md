@@ -1,6 +1,6 @@
 # Kumar Sahitya - Portfolio
 
-A single-page portfolio site built with React, TypeScript, Vite and Tailwind CSS. It covers profile, skills, experience, education and services, and supports a light and dark theme. Sections animate into view as you scroll, and the site is published to GitHub Pages from the root of `kumarsahitya.github.io`.
+A single-page portfolio site built with React, TypeScript, Vite and Tailwind CSS. It covers profile, skills, experience, education and services, and supports a light and dark theme. Sections animate into view as you scroll, and the site is published to GitHub Pages via GitHub Actions.
 
 ## Local development
 
@@ -13,7 +13,7 @@ npm run build   # type-check and build into dist/
 
 ## Editing content
 
-Almost all of the text on the site lives in `src/data/`:
+All visible text lives in `src/data/`, except headings and UI labels:
 
 - `profile.ts`: name, roles, about text, quick facts, email and social links.
 - `skills.ts`: the skill list with icons, and the intro text above it.
