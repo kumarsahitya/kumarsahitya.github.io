@@ -25,3 +25,7 @@ dist-ssr
 
 # Local scratch
 .superpowers/
+
+# Local tooling output
+.claude/
+lighthouse.json
