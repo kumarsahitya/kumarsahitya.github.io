@@ -6,7 +6,7 @@ import { HeroIllustration } from './HeroIllustration';
 import { Reveal } from './Reveal';
 import { SocialLinks } from './SocialLinks';
 
-const Particles = lazy(() => import('./Particles'));
+const Particles = lazy(() => import('./Particles').catch(() => ({ default: () => null })));
 
 export function Hero() {
   const motionAllowed = useMotionAllowed();
