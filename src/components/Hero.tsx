@@ -29,7 +29,8 @@ export function Hero() {
             <span className="text-accent">{profile.name}</span>
           </h1>
           <p aria-live="off" className="mt-4 text-xl text-text sm:text-2xl">
-            <span>{role}</span>
+            <span aria-hidden="true">{role}</span>
+            <span className="sr-only">{profile.roles.join(', ')}</span>
             {motionAllowed && <span aria-hidden="true" className="ml-0.5 animate-pulse text-accent">|</span>}
           </p>
           <div className="mt-8">
