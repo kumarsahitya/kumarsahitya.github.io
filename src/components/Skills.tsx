@@ -12,9 +12,9 @@ export function Skills() {
       <ul className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
         {skills.map(({ name, icon: Icon }, i) => (
           <Reveal as="li" key={name} delay={i * 0.05}>
-            <TiltCard className="bg-surface border border-border rounded-xl p-4 flex flex-col items-center gap-2 h-full">
+            <TiltCard className="bg-surface border border-border rounded-xl p-3 sm:p-4 flex flex-col items-center gap-2 h-full">
               <Icon className="text-3xl text-accent" aria-hidden="true" />
-              <span className="text-sm text-center">{name}</span>
+              <span className="text-xs sm:text-sm text-center">{name}</span>
             </TiltCard>
           </Reveal>
         ))}
