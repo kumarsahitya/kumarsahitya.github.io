@@ -19,7 +19,7 @@ export function About() {
             {profile.facts.map((fact) => (
               <div key={fact.label} className="contents">
                 <dt className="font-semibold">{fact.label}</dt>
-                <dd className="text-muted">
+                <dd className="text-muted min-w-0 break-words">
                   {fact.label === 'Email' ? (
                     <a href={`mailto:${profile.email}`} className="text-accent hover:underline">
                       {fact.value}
