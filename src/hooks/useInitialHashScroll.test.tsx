@@ -26,3 +26,13 @@ test('does nothing when there is no hash or the target is missing', () => {
   render(<Probe />);
   expect(scrollIntoView).not.toHaveBeenCalled();
 });
+
+test('does not throw on a malformed percent-encoded hash', () => {
+  const scrollIntoView = vi.fn();
+  Element.prototype.scrollIntoView = scrollIntoView;
+  window.history.replaceState(null, '', '#%');
+  expect(() => render(<Probe />)).not.toThrow();
+  window.history.replaceState(null, '', '#%E0%A4%A');
+  expect(() => render(<Probe />)).not.toThrow();
+  expect(scrollIntoView).not.toHaveBeenCalled();
+});
