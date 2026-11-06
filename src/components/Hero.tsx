@@ -14,7 +14,7 @@ export function Hero() {
   const role = motionAllowed ? typed : profile.roles[0];
 
   return (
-    <section id="hero" className="relative isolate min-h-[90svh] flex items-center overflow-hidden">
+    <section id="hero" className="relative isolate min-h-[90svh] flex items-center pt-16 overflow-hidden">
       {motionAllowed && (
         <div aria-hidden="true">
           <Suspense fallback={null}>
